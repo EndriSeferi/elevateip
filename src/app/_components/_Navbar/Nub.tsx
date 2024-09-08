@@ -1,14 +1,10 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const Nub = ({ selected }: { selected: number }) => {
   const [left, setLeft] = useState(0);
 
-  useEffect(() => {
-    moveNub();
-  }, [selected]);
-
-  const moveNub = () => {
+  const moveNub = useCallback(() => {
     if (selected) {
       const hoveredTab = document.getElementById(`shift-tab-${selected}`);
       const overlayContent = document.getElementById('overlay-content');
@@ -20,7 +16,12 @@ export const Nub = ({ selected }: { selected: number }) => {
       const tabCenter = tabRect.left + tabRect.width / 2 - contentLeft;
       setLeft(tabCenter);
     }
-  };
+  }, [selected]);
+
+  useEffect(() => {
+    moveNub();
+  }, [selected, moveNub]);
+
   return (
     <motion.span
       animate={{ left }}

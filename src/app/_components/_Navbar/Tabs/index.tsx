@@ -7,7 +7,7 @@ import { Content } from './Content';
 import { Tab } from './Tab';
 
 export const Tabs = () => {
-  const [selected, setSelected] = useState<number | null>(1);
+  const [selected, setSelected] = useState<number | null>(null);
   const [dir, setDir] = useState<null | 'left' | 'right'>(null);
   const handleSetSelected = (val: number | null) => {
     if (typeof selected === 'number' && typeof val === 'number') {
